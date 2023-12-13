@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link as link, useNavigate } from "react-router-dom";
+import { useRefresh } from "../Context/RefreshContext";
 import {
   AppBar,
   Avatar,
@@ -18,8 +19,13 @@ import axios from "axios";
 import { grey } from "@mui/material/colors";
 
 export default function Navbar() {
-  const [show, setShow] = useState(false);
-  const navigate = useNavigate();
+  const { refresh, setRefresh } = useRefresh();
+
+  const handleLogout = () => {
+    document.cookie =
+      "myCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    setRefresh(!refresh);
+  };
 
   return (
     <AppBar
@@ -53,7 +59,11 @@ export default function Navbar() {
         </IconButton>
         <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
 
-        <Button variant="outlined" sx={{ color: "black" }}>
+        <Button
+          variant="outlined"
+          sx={{ color: "black" }}
+          onClick={handleLogout}
+        >
           Logout
         </Button>
       </Toolbar>

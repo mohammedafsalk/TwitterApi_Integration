@@ -22,14 +22,13 @@ export default function Home() {
     setOpen(false);
   };
 
-  useEffect(() => {}, []);
-
   return (
     <>
       <Navbar />
       <Box
         marginTop={10}
         display="flex"
+        gap={3}
         flexDirection="column"
         alignItems="center"
         minHeight="100vh"
