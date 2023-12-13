@@ -54,7 +54,7 @@ async function redirect(req, res) {
           },
         }
       );
-      console.log(data,"data");
+      console.log(data.data,"data");
       return data;
     } catch (error) {
       console.log(error);

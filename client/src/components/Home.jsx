@@ -14,6 +14,7 @@ import {
 import { AddIcCallOutlined, ExitToApp } from "@mui/icons-material";
 import { deepOrange } from "@mui/material/colors";
 import PostModal from "./PostModal";
+import Navbar from "./Navbar";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
@@ -21,16 +22,14 @@ export default function Home() {
     setOpen(false);
   };
 
-  useEffect(()=>{
+  useEffect(() => {}, []);
 
-  },[])
- 
   return (
     <>
+      <Navbar />
       <Box
+        marginTop={10}
         display="flex"
-        justifyContent="center"
-        gap={5}
         flexDirection="column"
         alignItems="center"
         minHeight="100vh"
@@ -43,41 +42,16 @@ export default function Home() {
             Welcome User!
           </Typography>
         </Box>
-        <Box
-          width={400}
-          height={400}
-          p={2}
-          display={"flex"}
-          flexDirection={"column"}
-          border={1}
-          borderRadius={8}
+        <Button
+          variant="contained"
+          color="success"
+          size="medium"
+          onClick={() => {
+            setOpen(true);
+          }}
         >
-          <Box display={"flex"} justifyContent={"space-around"}>
-            <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
-            <Avatar src={logo} />
-            <Button variant="contained">Logout</Button>
-          </Box>
-          <Box
-            height={"100%"}
-            display={"flex"}
-            flexDirection={"column"}
-            alignContent={"center"}
-            justifyContent={"center"}
-            maxWidth={300}
-            margin="auto"
-          >
-            <Button
-              variant="contained"
-              color="success"
-              size="medium"
-              onClick={() => {
-                setOpen(true);
-              }}
-            >
-              Add Tweet
-            </Button>
-          </Box>
-        </Box>
+          Add Tweet
+        </Button>
       </Box>
       <PostModal open={open} handleClose={handleClose} />
     </>
