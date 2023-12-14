@@ -13,18 +13,47 @@ import {
 } from "@mui/material";
 import { AddIcCallOutlined, ExitToApp } from "@mui/icons-material";
 import { deepOrange } from "@mui/material/colors";
+import { useLocation } from 'react-router-dom';
 import PostModal from "./PostModal";
 import Navbar from "./Navbar";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
+  const [cookie, setCookie] = useState("");
+
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+
+  const name = params.get('name') ? decodeURIComponent(params.get('name')) : '';
+  const profile_image_url = params.get('profile_image_url')
+    ? decodeURIComponent(params.get('profile_image_url'))
+    : '';
+
+  useEffect(() => {
+    console.log('Name:', name);
+    console.log('Profile Image URL:', profile_image_url);
+  }, [name, profile_image_url]);
+
+  useEffect(() => {
+    const getCookie = (cookieName) => {
+      const name = cookieName + "=";
+      const decodedCookie = decodeURIComponent(document.cookie);
+      const cookieArray = decodedCookie.split(";");
+      let cookie = cookieArray[0].trim();
+      return cookie.substring(name.length, cookie.length);
+    };
+
+    const myCookieValue = getCookie("myCookie");
+    setCookie(myCookieValue);
+  }, []);
+
   const handleClose = () => {
     setOpen(false);
   };
 
   return (
     <>
-      <Navbar />
+      <Navbar cookie={cookie} />
       <Box
         marginTop={10}
         display="flex"
@@ -52,7 +81,7 @@ export default function Home() {
           Add Tweet
         </Button>
       </Box>
-      <PostModal open={open} handleClose={handleClose} />
+      <PostModal open={open} handleClose={handleClose} cookie={cookie} />
     </>
   );
 }

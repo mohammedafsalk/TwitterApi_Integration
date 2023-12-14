@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 
-export default function PostModal({ open, handleClose }) {
+export default function PostModal({ open, handleClose,cookie }) {
   const style = {
     position: "absolute",
     top: "50%",
@@ -15,21 +15,8 @@ export default function PostModal({ open, handleClose }) {
     p: 4,
   };
 
-  const [cookie, setCookie] = useState("");
   const [tweetData, setTweetData] = useState("");
 
-  useEffect(() => {
-    const getCookie = (cookieName) => {
-      const name = cookieName + "=";
-      const decodedCookie = decodeURIComponent(document.cookie);
-      const cookieArray = decodedCookie.split(";");
-      let cookie = cookieArray[0].trim();
-      return cookie.substring(name.length, cookie.length);
-    };
-
-    const myCookieValue = getCookie("myCookie");
-    setCookie(myCookieValue);
-  }, []); //
 
   async function handleSave() {
     let items = { tweetData, cookie };

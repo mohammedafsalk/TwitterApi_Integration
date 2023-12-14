@@ -18,13 +18,17 @@ import { deepOrange } from "@mui/material/colors";
 import axios from "axios";
 import { grey } from "@mui/material/colors";
 
-export default function Navbar() {
+export default function Navbar({ cookie }) {
   const { refresh, setRefresh } = useRefresh();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    let token = cookie;
     document.cookie =
       "myCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     setRefresh(!refresh);
+    let { data } = await axios.post("http://localhost:3000/auth/logout", {
+      token,
+    });
   };
 
   return (
