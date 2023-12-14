@@ -39,7 +39,7 @@ async function redirect(req, res) {
     console.log(accessToken);
     // const { name, profile_image_url } = result;
     res.cookie("myCookie", accessToken);
-    res.redirect("https://tweetappinteg.netlify.app");
+    res.redirect("https://tweetappinteg.netlify.app/");
     // res.redirect(
     //   `http://localhost:5173/?name=${encodeURIComponent(
     //     name
