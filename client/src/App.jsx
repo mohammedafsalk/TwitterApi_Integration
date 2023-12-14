@@ -7,7 +7,7 @@ import Home from "./components/Home";
 import { useEffect, useState } from "react";
 
 function App() {
-  axios.defaults.baseURL = "https://tweetapp-kohz.onrender.com";
+  axios.defaults.baseURL = "http://localhost:3000";
   axios.defaults.withCredentials = true;
 
   const { refresh } = useRefresh();

@@ -6,8 +6,8 @@ dotenv.config();
 
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
-const redirectUri = "https://tweetapp-kohz.onrender.com/auth/twitter/callback";
-// const redirectUri = "http://localhost:3000/auth/twitter/callback";
+// const redirectUri = "https://tweetapp-kohz.onrender.com/auth/twitter/callback";
+const redirectUri = "http://localhost:3000/auth/twitter/callback";
 const codeVerifier = "challenge";
 
 async function redirect(req, res) {
@@ -38,21 +38,14 @@ async function redirect(req, res) {
     const accessToken = data.access_token;
     const result = await getDetails(accessToken);
     console.log(accessToken);
-    // const { name, profile_image_url } = result;
-    res.cookie("myCookie", accessToken, {
-      httpOnly: false,
-      secure: false,
-      sameSite: 'none',
-      maxAge: 8 * 1000 * 60,
-    });
+    const { name, profile_image_url } = result;
+    res.cookie("myCookie", accessToken);
 
     // res.redirect("http://localhost:5173");
-    res.redirect("https://tweetappinteg.netlify.app");
-    // res.redirect(
-    //   `http://localhost:5173/?name=${encodeURIComponent(
-    //     name
-    //   )}&profile_image_url=${encodeURIComponent(profile_image_url)}`
-    // );
+    // res.redirect("https://tweetappinteg.netlify.app");
+    res.redirect(
+      `http://localhost:5173/?name=${name}&profile_image_url=${profile_image_url}`
+    );
   } catch (error) {
     res.send("Something went wrong");
     console.log(error);

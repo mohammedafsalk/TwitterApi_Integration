@@ -11,7 +11,10 @@ export default function Home() {
   const [cookie, setCookie] = useState("");
 
   const location = useLocation();
+
   const params = new URLSearchParams(location.search);
+
+  
 
   const name = params.get("name") ? decodeURIComponent(params.get("name")) : "";
   const profile_image_url = params.get("profile_image_url")
