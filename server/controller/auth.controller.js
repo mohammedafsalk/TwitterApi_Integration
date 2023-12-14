@@ -40,7 +40,7 @@ async function redirect(req, res) {
     console.log(accessToken);
     // const { name, profile_image_url } = result;
     res.cookie("myCookie", accessToken, {
-      httpOnly: false,
+      // httpOnly: false,
     });
 
     // res.redirect("http://localhost:5173");
