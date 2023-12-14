@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import { useEffect, useState } from "react";
 
 function App() {
+  axios.defaults.baseURL = "https://tweetapp-kohz.onrender.com";
   axios.defaults.withCredentials = true;
 
   const { refresh } = useRefresh();
@@ -24,7 +25,7 @@ function App() {
     } else {
       setLogin(false);
     }
-  }, [refresh]);
+  }, [refresh, login]);
 
   return (
     <>

@@ -3,7 +3,8 @@ import logo from "../assets/twitter-new-logo-8A0C4E0C58-seeklogo.com.png";
 import "../App.css";
 
 export default function Login() {
-  const redirect = "https://tweetapp-kohz.onrender.com/auth/twitter/callback";
+  // const redirect = "https://tweetapp-kohz.onrender.com/auth/twitter/callback";
+  const redirect = "http://localhost:3000/auth/twitter/callback";
   const clientId = "amZwQjVLLVpaUVNmVUNMTUNwZjg6MTpjaQ";
 
   function handleLogin() {
