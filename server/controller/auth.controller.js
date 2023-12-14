@@ -2,12 +2,11 @@ const querystring = require("querystring");
 const dotenv = require("dotenv");
 const axios = require("axios");
 
-
 dotenv.config();
 
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
-const redirectUri = "http://localhost:3000/auth/twitter/callback";
+const redirectUri = "https://tweetapp-kohz.onrender/auth/twitter/callback";
 const codeVerifier = "challenge";
 
 async function redirect(req, res) {
@@ -40,7 +39,7 @@ async function redirect(req, res) {
     console.log(accessToken);
     // const { name, profile_image_url } = result;
     res.cookie("myCookie", accessToken);
-    res.redirect("http://localhost:5173");
+    res.redirect("https://tweetappinteg.netlify.app");
     // res.redirect(
     //   `http://localhost:5173/?name=${encodeURIComponent(
     //     name
@@ -62,7 +61,6 @@ async function redirect(req, res) {
         }
       );
       return data.data;
-      oken = Q0Mzb0VhZ0V5dmNXSTEyNER2MFNfVW50RzdXdTN6STFxQlVkTGhTc;
     } catch (error) {
       console.log(error.message);
     }

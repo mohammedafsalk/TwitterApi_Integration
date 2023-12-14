@@ -21,7 +21,7 @@ export default function PostModal({ open, handleClose, cookie }) {
   async function handleSave() {
     let items = { tweetData, cookie };
     let { data } = await axios.post(
-      "http://localhost:3000/tweet/create",
+      "https://tweetapp-kohz.onrender/tweet/create",
       items
     );
     if (data.success) {

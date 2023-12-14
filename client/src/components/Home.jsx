@@ -1,19 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
-import logo from "../assets/twitter-new-logo-8A0C4E0C58-seeklogo.com.png";
 
-import {
-  Box,
-  Button,
-  AppBar,
-  Toolbar,
-  Typography,
-  IconButton,
-  Avatar,
-} from "@mui/material";
-import { AddIcCallOutlined, ExitToApp } from "@mui/icons-material";
-import { deepOrange } from "@mui/material/colors";
-import { useLocation } from 'react-router-dom';
+import { Box, Button, Typography } from "@mui/material";
+import { useLocation } from "react-router-dom";
 import PostModal from "./PostModal";
 import Navbar from "./Navbar";
 
@@ -24,14 +13,14 @@ export default function Home() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
 
-  const name = params.get('name') ? decodeURIComponent(params.get('name')) : '';
-  const profile_image_url = params.get('profile_image_url')
-    ? decodeURIComponent(params.get('profile_image_url'))
-    : '';
+  const name = params.get("name") ? decodeURIComponent(params.get("name")) : "";
+  const profile_image_url = params.get("profile_image_url")
+    ? decodeURIComponent(params.get("profile_image_url"))
+    : "";
 
   useEffect(() => {
-    console.log('Name:', name);
-    console.log('Profile Image URL:', profile_image_url);
+    console.log("Name:", name);
+    console.log("Profile Image URL:", profile_image_url);
   }, [name, profile_image_url]);
 
   useEffect(() => {
