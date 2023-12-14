@@ -41,11 +41,11 @@ async function redirect(req, res) {
     res.cookie("myCookie", accessToken, {
       secure: true,
       httpOnly: true,
-      path: "/",
-      sameSite: "None",
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+      sameSite: "none",
     });
 
-    res.redirect("https://tweetappinteg.netlify.app/");
+    res.redirect("https://tweetappinteg.netlify.app");
     // res.redirect(
     //   `http://localhost:5173/?name=${encodeURIComponent(
     //     name
