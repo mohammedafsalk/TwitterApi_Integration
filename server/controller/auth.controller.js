@@ -39,10 +39,7 @@ async function redirect(req, res) {
     console.log(accessToken);
     // const { name, profile_image_url } = result;
     res.cookie("myCookie", accessToken, {
-      secure: true,
-      httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 7,
-      sameSite: "none",
     });
 
     res.redirect("https://tweetappinteg.netlify.app");
