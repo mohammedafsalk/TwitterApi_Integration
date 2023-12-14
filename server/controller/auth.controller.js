@@ -1,12 +1,11 @@
 const querystring = require("querystring");
 const dotenv = require("dotenv");
 const axios = require("axios");
-const jwt = require("jsonwebtoken");
 
 dotenv.config();
 
-const clientId = "amZwQjVLLVpaUVNmVUNMTUNwZjg6MTpjaQ";
-const clientSecret = "jHs7OW6Jxt9a6z4ilPyaYP3SGWntY1oCykkOXEYt_-ax4qKqvx";
+const clientId = process.env.CLIENT_ID;
+const clientSecret = process.env.CLIENT_SECRET;
 const redirectUri = "http://localhost:3000/auth/twitter/callback";
 const codeVerifier = "challenge";
 
@@ -37,10 +36,15 @@ async function redirect(req, res) {
     );
     const accessToken = data.access_token;
     const result = await getDetails(accessToken);
-
+    const { name, profile_image_url } = result;
     res.cookie("myCookie", accessToken);
-    res.redirect("http://localhost:5173/");
+    res.redirect(
+      `http://localhost:5173/?name=${encodeURIComponent(
+        name
+      )}&profile_image_url=${encodeURIComponent(profile_image_url)}`
+    );
   } catch (error) {
+    res.send("Something went wrong");
     console.log(error);
   }
 
@@ -54,12 +58,31 @@ async function redirect(req, res) {
           },
         }
       );
-      console.log(data.data,"data");
-      return data;
+      return data.data;
     } catch (error) {
       console.log(error);
     }
   }
 }
 
-module.exports = { redirect };
+async function logout(req, res) {
+  try {
+    const { token } = req.body;
+    let { data } = await axios.post(
+      "https://api.twitter.com/2/oauth2/revoke",
+      `token=${encodeURIComponent(token)}&client_id=${encodeURIComponent(
+        clientId
+      )}`,
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
+    console.log("data", data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+module.exports = { redirect, logout };
