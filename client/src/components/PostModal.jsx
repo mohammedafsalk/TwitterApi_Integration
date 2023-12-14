@@ -21,7 +21,7 @@ export default function PostModal({ open, handleClose, cookie }) {
   async function handleSave() {
     let items = { tweetData, cookie };
     let { data } = await axios.post(
-      "https://tweetapp-kohz.onrender/tweet/create",
+      "https://tweetapp-kohz.onrender.com/tweet/create",
       items
     );
     if (data.success) {
@@ -55,7 +55,7 @@ export default function PostModal({ open, handleClose, cookie }) {
           <Box display={"flex"} justifyContent={"center"}>
             <Button
               type="button"
-              onClick={handleSave} // disabled={isAnyFieldEmpty}
+              onClick={handleSave} 
               variant="contained"
               sx={{ color: "white", bgcolor: "black" }}
             >

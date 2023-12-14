@@ -19,7 +19,7 @@ export default function Navbar({ cookie }) {
     let token = cookie;
     document.cookie =
       "myCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    let { data } = await axios.post("https://tweetapp-kohz.onrender/auth/logout", {
+    let { data } = await axios.post("https://tweetapp-kohz.onrender.com/auth/logout", {
       token,
     });
     if (data.success) {

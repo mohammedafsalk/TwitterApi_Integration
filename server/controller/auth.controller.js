@@ -6,7 +6,7 @@ dotenv.config();
 
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
-const redirectUri = "https://tweetapp-kohz.onrender/auth/twitter/callback";
+const redirectUri = "https://tweetapp-kohz.onrender.com/auth/twitter/callback";
 const codeVerifier = "challenge";
 
 async function redirect(req, res) {
