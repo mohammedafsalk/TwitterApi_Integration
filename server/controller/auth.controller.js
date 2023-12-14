@@ -40,7 +40,10 @@ async function redirect(req, res) {
     console.log(accessToken);
     // const { name, profile_image_url } = result;
     res.cookie("myCookie", accessToken, {
-      // httpOnly: false,
+      httpOnly: false,
+      secure: false,
+      sameSite: 'none',
+      maxAge: 8 * 1000 * 60,
     });
 
     // res.redirect("http://localhost:5173");
