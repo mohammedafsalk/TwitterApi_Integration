@@ -13,6 +13,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: "https://tweetappinteg.netlify.app",
+    credentials: true,
   })
 );
 

@@ -7,7 +7,9 @@ import Home from "./components/Home";
 import { useEffect, useState } from "react";
 
 function App() {
-  const { refresh} = useRefresh();
+  axios.defaults.withCredentials = true;
+
+  const { refresh } = useRefresh();
   const [login, setLogin] = useState(false);
   useEffect(() => {
     const name = "myCookie" + "=";
