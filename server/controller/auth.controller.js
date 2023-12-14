@@ -2,6 +2,7 @@ const querystring = require("querystring");
 const dotenv = require("dotenv");
 const axios = require("axios");
 
+
 dotenv.config();
 
 const clientId = process.env.CLIENT_ID;
@@ -36,13 +37,15 @@ async function redirect(req, res) {
     );
     const accessToken = data.access_token;
     const result = await getDetails(accessToken);
-    const { name, profile_image_url } = result;
+    console.log(accessToken);
+    // const { name, profile_image_url } = result;
     res.cookie("myCookie", accessToken);
-    res.redirect(
-      `http://localhost:5173/?name=${encodeURIComponent(
-        name
-      )}&profile_image_url=${encodeURIComponent(profile_image_url)}`
-    );
+    res.redirect("http://localhost:5173");
+    // res.redirect(
+    //   `http://localhost:5173/?name=${encodeURIComponent(
+    //     name
+    //   )}&profile_image_url=${encodeURIComponent(profile_image_url)}`
+    // );
   } catch (error) {
     res.send("Something went wrong");
     console.log(error);
@@ -59,8 +62,9 @@ async function redirect(req, res) {
         }
       );
       return data.data;
+      oken = Q0Mzb0VhZ0V5dmNXSTEyNER2MFNfVW50RzdXdTN6STFxQlVkTGhTc;
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   }
 }
@@ -70,18 +74,17 @@ async function logout(req, res) {
     const { token } = req.body;
     let { data } = await axios.post(
       "https://api.twitter.com/2/oauth2/revoke",
-      `token=${encodeURIComponent(token)}&client_id=${encodeURIComponent(
-        clientId
-      )}`,
+      `token=${token}&client_id=${clientId}&token_type_hint=access_token`,
       {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
       }
     );
-    console.log("data", data);
+    res.json({ success: true, message: "Token revoked successfully" });
   } catch (error) {
     console.log(error);
+    res.json({ success: false, message: "Something went wrong" });
   }
 }
 
