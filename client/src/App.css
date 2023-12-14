@@ -5,6 +5,15 @@
   text-align: center;
 }
 
+.login {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
 .logo {
   height: 6em;
   padding: 1.5em;

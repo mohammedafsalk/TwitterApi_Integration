@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import { message } from "antd";
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 
-export default function PostModal({ open, handleClose,cookie }) {
+export default function PostModal({ open, handleClose, cookie }) {
   const style = {
     position: "absolute",
     top: "50%",
@@ -17,7 +18,6 @@ export default function PostModal({ open, handleClose,cookie }) {
 
   const [tweetData, setTweetData] = useState("");
 
-
   async function handleSave() {
     let items = { tweetData, cookie };
     let { data } = await axios.post(
@@ -27,7 +27,7 @@ export default function PostModal({ open, handleClose,cookie }) {
     if (data.success) {
       handleClose();
     }
-    alert(data.message);
+    message.success(data.message);
   }
 
   return (

@@ -1,17 +1,11 @@
-import React, { useState } from "react";
-import { Link as link, useNavigate } from "react-router-dom";
 import { useRefresh } from "../Context/RefreshContext";
+import { message } from "antd";
 import {
   AppBar,
   Avatar,
-  Box,
-  Container,
-  MenuItem,
   Toolbar,
-  Menu,
   Button,
   Typography,
-  Link,
   IconButton,
 } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
@@ -25,10 +19,15 @@ export default function Navbar({ cookie }) {
     let token = cookie;
     document.cookie =
       "myCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    setRefresh(!refresh);
     let { data } = await axios.post("http://localhost:3000/auth/logout", {
       token,
     });
+    if (data.success) {
+      setRefresh(!refresh);
+      message.success(data.message);
+    } else {
+      message.error(data.message);
+    }
   };
 
   return (
