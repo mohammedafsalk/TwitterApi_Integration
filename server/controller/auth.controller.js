@@ -42,7 +42,7 @@ async function redirect(req, res) {
       secure: true,
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 7,
-      sameSite: "none",
+      // sameSite: "none",
     });
 
     res.redirect("https://tweetappinteg.netlify.app");
